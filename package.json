@@ -1,0 +1,14 @@
+{
+  "name": "react-spotify",
+  "version": "1.0.0",
+  "description": "This is a app created in react that uses spotify WEB API as backend.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "spotify;frontend;react"
+  ],
+  "author": "Lucas Rosate",
+  "license": "ISC"
+}
