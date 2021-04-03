@@ -4,11 +4,46 @@
   "description": "This is a app created in react that uses spotify WEB API as backend.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "craco test",
+    "dev": "craco start",
+    "build": "craco build"
   },
   "keywords": [
     "spotify;frontend;react"
   ],
   "author": "Lucas Rosate",
-  "license": "ISC"
+  "license": "MIT",
+  "dependencies": {
+    "@craco/craco": "^6.1.1",
+    "axios": "^0.21.1",
+    "lodash": "^4.17.21",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "^4.0.3",
+    "redux": "^4.0.5",
+    "tailwindcss": "^2.0.4",
+    "typescript": "^4.2.3"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
