@@ -21,7 +21,6 @@
     "react-dom": "^17.0.2",
     "react-scripts": "^4.0.3",
     "redux": "^4.0.5",
-    "tailwindcss": "^2.0.4",
     "typescript": "^4.2.3"
   },
   "eslintConfig": {
@@ -31,8 +30,13 @@
     ]
   },
   "devDependencies": {
+    "@tailwindcss/postcss7-compat": "^2.0.4",
     "@types/react": "^17.0.3",
-    "@types/react-dom": "^17.0.3"
+    "@types/react-dom": "^17.0.3",
+    "@types/spotify-web-playback-sdk": "^0.1.8",
+    "autoprefixer": "^9.8.6",
+    "postcss": "^7.0.35",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.4"
   },
   "browserslist": {
     "production": [

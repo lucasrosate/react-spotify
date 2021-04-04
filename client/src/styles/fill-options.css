@@ -1,0 +1,9 @@
+
+@layer utilities {
+    .bg-color {
+        background-color: var(--background-color);
+    }
+    .bg-color-lighter {
+        background-color: var(--background-color-lighter);
+    }
+}

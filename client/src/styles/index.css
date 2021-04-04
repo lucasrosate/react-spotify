@@ -1,0 +1,32 @@
+/* ./src/index.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url(./buttons.css);
+@import url(./font-options.css);
+@import url(./fill-options.css);
+
+:root {
+    --background-color: #121212;
+    --background-color-lighter: #282828;
+    --border-color: #a4a4a4;
+    --primary-color: #179443;
+    --primary-color-lighter: #18ac4d;
+    --text-color-primary: rgb(21, 21, 21);
+    --text-color-secondary: #ffff;
+    --text-color-secondary-darker: #ddddf1;
+}
+
+* {
+    color: var(--text-color);
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+}
+
+body {
+    margin: 0;
+    box-sizing: border-box;
+    color: var(--text-color-primary);
+}
