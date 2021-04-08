@@ -16,11 +16,14 @@
   "dependencies": {
     "@craco/craco": "^6.1.1",
     "axios": "^0.21.1",
+    "crypto-js": "^4.0.0",
     "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.3",
     "react-scripts": "^4.0.3",
     "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
     "typescript": "^4.2.3"
   },
   "eslintConfig": {
@@ -31,6 +34,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss7-compat": "^2.0.4",
+    "@types/crypto-js": "^4.0.1",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
     "@types/spotify-web-playback-sdk": "^0.1.8",
