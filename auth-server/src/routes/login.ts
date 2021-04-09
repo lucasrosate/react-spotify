@@ -19,8 +19,6 @@ const loginRoute = (req: Request, res: Response) => {
     var state = generateRandomString(16);
     res.cookie(stateKey, state);
 
-    console.log(stringScope())
-
     res.redirect('https://accounts.spotify.com/authorize?' +
         querystring.stringify({
             response_type: 'code',
