@@ -1,0 +1,36 @@
+@layer utilities {
+    .btn-spotify {
+        @apply rounded-full;
+        padding: 0.6rem 2rem 0.6rem 2rem;
+        font-size: 1rem;
+
+        font-weight: 600;
+        font-family: "Montserrat", sans-serif;
+    }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+        color: var(--text-color-secondary);
+        transition: background-color 200ms;
+    }
+
+    .btn-primary:hover {
+        background-color: var(--primary-color-lighter);
+        
+    }
+
+    .btn-white, .btn-no-bg {
+        background-color: white;
+        color: var(--text-color-primary);
+
+        transition: trasnform 200ms;
+    }
+
+    .btn-white:hover {
+        transform: scale(1.05);
+    }
+
+    .spotify-btn:focus {
+        outline: none;
+    }
+}

@@ -3,10 +3,34 @@ export interface IAuth {
     refresh_token: string | null,
 }
 
+interface IFollowersObject {
+    href: string | null,
+    total: number | null
+}
+
+interface I_ImageObject {
+    height: number | null,
+    width: number | null,
+    url: string | null
+}
+
+interface IExternalUrl {
+    spotify: string
+}
+
 export interface IUser {
-    username: string,
+    id: string | null,
+    displayName: string,
+    email: string,
+    followers: IFollowersObject,
     profileImage: string,
-    email: string
+    externalUrl: IExternalUrl,
+    images: Array<I_ImageObject>,
+    product: string,
+    href: string,
+    type: string,
+    uri: string,
+    isLoggedIn: boolean
 }
 
 export type State = {

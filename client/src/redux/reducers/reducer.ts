@@ -9,14 +9,32 @@ const initialState: State = {
         refresh_token: null,
     },
     user: {
-        username: "",
+        id: null,
+        displayName: "",
+        email: "",
+        followers: {
+            href: null,
+            total: null
+        },
         profileImage: "",
-        email: ""
+        externalUrl: {
+            spotify: ""
+        },
+        images: [{
+            url:null,
+            height: null,
+            width: null
+        }],
+        product: "",
+        href: "",
+        type: "",
+        uri: "",
+        isLoggedIn: false
     },
     player: null,
     loading: false,
     error: "",
-    codeError: null,
+    codeError: null
 }
 
 
@@ -24,22 +42,24 @@ const initialState: State = {
 export const reducer: Reducer<State, StateAction> =
     (state: State = initialState, action: StateAction): State => {
         switch (action.type) {
-            case actionType.GET_STATE: 
-                return state;
 
-            case actionType.GET_TOKEN_OAUTH2_SUCCESS:
+            case actionType.UPDATE_USER_DATA_SUCCESS:
                 return {
                     ...state,
                     auth: {
-                        access_token: action.payload.access_token ,
-                        refresh_token: action.payload.refresh_token
+                        access_token: action.payload.tokens.access_token,
+                        refresh_token: action.payload.tokens.refresh_token,
+                    },
+                    user: {
+                        ...action.payload.data,
+                        isLoggedIn: true,
                     }
                 }
 
-            case actionType.GET_TOKEN_OAUTH2_FAILED:
+            case actionType.UPDATE_USER_DATA_FAILED:
                 return {
                     ...state,
-                    codeError: 1
+                    error: action.payload
                 }
 
             default: return state;

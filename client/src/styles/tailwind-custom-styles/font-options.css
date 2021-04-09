@@ -1,4 +1,10 @@
 @layer utilities {
+    .text-primary,
+    .text-secondary,
+    .text-secondary-darker {
+        font-size: 1rem;
+    }
+
     .text-primary {
         color: var(--text-color-primary);
     }
