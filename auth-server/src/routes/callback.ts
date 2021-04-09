@@ -51,18 +51,9 @@ const callbackRoute = (req: Request, res: Response) => {
                 var access_token = body.access_token,
                     refresh_token = body.refresh_token;
 
-                var options = {
-                    url: 'https://api.spotify.com/v1/me',
-                    headers: { 'Authorization': 'Bearer ' + access_token },
-                    json: true
-                };
+                console.log(access_token);
+                console.log(refresh_token);
 
-                // use the access token to access the Spotify Web API
-                request.get(options, function (error, response, body) {
-                    // console.log(body);
-                });
-
-                // we can also pass the token to the browser to make requests from there
                 res.redirect(CLIENT_APP_URL + '/#' +
                     querystring.stringify({
                         access_token: encrypt(access_token).toString(),

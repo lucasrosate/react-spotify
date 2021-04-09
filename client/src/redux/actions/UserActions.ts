@@ -5,88 +5,85 @@ import getHarshParams from '@/utils/getHarshParams';
 import * as actionType from '../types';
 import { State, StateAction } from '@/interfaces/StateInterface';
 import { Dispatch } from 'redux';
+import { IErrorMessage } from '@/interfaces/ErrorHandlingInterface';
 
 
-export const getToken = () => {
-    return (dispatch: Dispatch<StateAction>) => {
-        const {
-            success,
-            access_token,
-            refresh_token
-        } = getHarshParams();
+export const getUserData = () => {
+    return async (dispatch: Dispatch<StateAction>) => {
+        const tokens = store.getState().auth;
 
-        console.log(success)
-
-        if (success) {
+        if (!tokens.access_token) {
             return dispatch({
-                type: actionType.GET_TOKEN_OAUTH2_SUCCESS,
+                type: actionType.GET_USER_DATA_FAILED,
                 payload: {
-                    access_token,
-                    refresh_token
-                }
+                    errorMessage: "access_token does not exist.",
+                    codeError: 1
+                } as IErrorMessage
+            });
+        }
+
+        const res = await axios.get('https://api.spotify.com/v1/me', {
+            headers: { 'Authorization': 'Bearer ' + tokens.access_token }
+        });
+
+        if (res.status >= 400) {
+            localStorage.removeItem("access_token");
+            return getAccessToken();
+        }
+
+        return dispatch({
+            type: actionType.GET_USER_DATA_SUCCESS,
+            payload: res.data
+        })
+
+    }
+}
+
+export const getAccessToken = () => {
+    return async (dispatch: Dispatch<StateAction>) => {
+        const refresh_token = localStorage.getItem("refresh_token");
+
+        const res = await axios.get("http://localhost:3333/refresh_token", {
+            data: refresh_token
+        });
+
+        if (res.status !== 400) {
+            localStorage.setItem("access_token", res.data.access_token);
+            return dispatch({
+                type: actionType.GET_ACCESS_TOKEN_SUCCESS,
+                payload: res.data.access_token
             });
 
         } else {
-            return dispatch({
-                type: actionType.GET_TOKEN_OAUTH2_FAILED,
-                payload: {
 
-                }
+            localStorage.removeItem("refresh_token");
+            return dispatch({
+                type: actionType.GET_ACCESS_TOKEN_FAILED,
+                payload: ""
             });
         }
     }
 }
 
-export const getUserData = () => {
+export const authenticate = () => {
     return async (dispatch: Dispatch<StateAction>) => {
+        const tokens = getHarshParams();
 
-        var access_token = localStorage.getItem("access_token");
-        var refresh_token = localStorage.getItem("refresh_token");
-
-
-        if (!access_token) {
-            const newToken = getHarshParams();
-            console.log(newToken)
-
-            if (newToken.success && newToken.access_token.length > 1) {
-                console.log(newToken)
-                access_token = newToken.access_token;
-                refresh_token = newToken.refresh_token;
-
-            } else {
-                return dispatch({
-                    type: actionType.UPDATE_USER_DATA_FAILED,
-                    payload: ""
-                });
-            }
+        if (tokens.success) {
+            return dispatch({
+                type: actionType.AUTH_SUCCESS,
+                payload: tokens
+            })
+        } else {
+            return dispatch({
+                type: actionType.AUTH_FAILED,
+                payload: {
+                    errorMessage: "token data is not valid",
+                    codeError: 3
+                } as IErrorMessage
+            });
         }
 
-        const res = await axios.get('https://api.spotify.com/v1/me', {
-            headers: { 'Authorization': 'Bearer ' + access_token }
-        });
-
-        if (res.status >= 400) {
-            localStorage.removeItem("access_token");
-            return getUserData();
-        }
-
-        localStorage.setItem("access_token", access_token as string);
-        localStorage.setItem("refresh_token", refresh_token as string);
-
-
-        const data = res.data;
-
-        dispatch({
-            type: actionType.UPDATE_USER_DATA_SUCCESS,
-            payload: {
-                data,
-                tokens: {
-                    refresh_token,
-                    access_token
-                }
-            }
-
-        });
 
 
     }

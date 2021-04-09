@@ -21,7 +21,7 @@ const initialState: State = {
             spotify: ""
         },
         images: [{
-            url:null,
+            url: null,
             height: null,
             width: null
         }],
@@ -33,8 +33,11 @@ const initialState: State = {
     },
     player: null,
     loading: false,
-    error: "",
-    codeError: null
+    error: {
+        errorMessage: "",
+        codeError: null
+    }
+
 }
 
 
@@ -43,20 +46,46 @@ export const reducer: Reducer<State, StateAction> =
     (state: State = initialState, action: StateAction): State => {
         switch (action.type) {
 
-            case actionType.UPDATE_USER_DATA_SUCCESS:
+            case actionType.GET_USER_DATA_SUCCESS:
                 return {
                     ...state,
-                    auth: {
-                        access_token: action.payload.tokens.access_token,
-                        refresh_token: action.payload.tokens.refresh_token,
-                    },
                     user: {
                         ...action.payload.data,
                         isLoggedIn: true,
                     }
                 }
 
-            case actionType.UPDATE_USER_DATA_FAILED:
+            case actionType.GET_USER_DATA_FAILED:
+                return {
+                    ...state,
+                    error: action.payload
+                }
+
+
+            case actionType.GET_ACCESS_TOKEN_SUCCESS:
+                return {
+                    ...state,
+                    auth: {
+                        ...state.auth,
+                        access_token: action.payload
+                    }
+                }
+
+            case actionType.GET_USER_DATA_FAILED:
+                return {
+                    ...state,
+                    error: action.payload
+                }
+
+            case actionType.AUTH_SUCCESS: 
+                return {
+                    ...state,
+                    auth: {
+                        ...action.payload
+                    }
+                }
+            
+            case actionType.AUTH_SUCCESS:
                 return {
                     ...state,
                     error: action.payload
