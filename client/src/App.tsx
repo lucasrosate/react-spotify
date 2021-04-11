@@ -19,11 +19,11 @@ const App: React.FC = () => {
 
                     {JSON.stringify(userState)}
 
-                  
-                        <div>
-                            <a href="http://localhost:3333/login" className="btn-spotify btn-primary">Log in</a>
-                        </div>
-         
+
+                    <div>
+                        <a href="http://localhost:3333/login" className="btn-spotify btn-primary">Log in</a>
+                    </div>
+
 
                 </div>
             </div>

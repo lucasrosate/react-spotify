@@ -1,6 +1,5 @@
 import { State, StateAction } from '@/interfaces/StateInterface';
-import { Reducer, Store } from 'redux';
-import { Dispatch } from 'redux';
+import { Reducer } from 'redux';
 import * as actionType from '../types';
 
 const initialState: State = {
@@ -50,16 +49,17 @@ export const reducer: Reducer<State, StateAction> =
                 return {
                     ...state,
                     user: {
-                        ...action.payload.data,
+                        ...action.payload,
                         isLoggedIn: true,
-                    }
-                }
+                    },
+                    error: { ...state.error, codeError: null}
+                };
 
             case actionType.GET_USER_DATA_FAILED:
                 return {
                     ...state,
                     error: action.payload
-                }
+                };
 
 
             case actionType.GET_ACCESS_TOKEN_SUCCESS:
@@ -67,15 +67,16 @@ export const reducer: Reducer<State, StateAction> =
                     ...state,
                     auth: {
                         ...state.auth,
-                        access_token: action.payload
-                    }
-                }
+                        access_token: action.payload,
+                    },
+                    error: { ...state.error, codeError: null}
+                };
 
             case actionType.GET_USER_DATA_FAILED:
                 return {
                     ...state,
                     error: action.payload
-                }
+                };
 
             case actionType.AUTH_SUCCESS: 
                 return {
@@ -83,13 +84,13 @@ export const reducer: Reducer<State, StateAction> =
                     auth: {
                         ...action.payload
                     }
-                }
+                };
             
             case actionType.AUTH_SUCCESS:
                 return {
                     ...state,
-                    error: action.payload
-                }
+                    error: { ...state.error, codeError: null}
+                };
 
             default: return state;
         }
