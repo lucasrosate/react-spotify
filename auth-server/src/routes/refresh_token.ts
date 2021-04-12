@@ -1,7 +1,7 @@
 import request from 'request';
 import { Request, Response } from 'express';
 
-import encrypt from '../common/security';
+import { encrypt, decrypt } from '../common/security';
 
 require('dotenv').config();
 const {
@@ -13,7 +13,8 @@ const {
 const refreshTokenRoute = (req: Request, res: Response) => {
 
     // requesting access token from refresh token
-    var refresh_token = req.query.refresh_token;
+    var refresh_token = decrypt(req.query.refresh_token as string);
+
     var authOptions = {
         url: 'https://accounts.spotify.com/api/token',
         headers: { 'Authorization': 'Basic ' + (Buffer.from(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64')) },

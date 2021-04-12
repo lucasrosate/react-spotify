@@ -2,7 +2,7 @@
 import request from 'request';
 import querystring from 'querystring';
 import { stateKey } from '../common/stateKey';
-import encrypt from '../common/security';
+import {encrypt} from '../common/security';
 
 import { Request, Response } from 'express';
 
@@ -17,10 +17,6 @@ const {
 const REDIRECT_URI = BASE_URL + '/callback/';
 
 const callbackRoute = (req: Request, res: Response) => {
-
-    // your application requests refresh and access tokens
-    // after checking the state parameter
-
     var code = req.query.code || null;
     var state = req.query.state || null;
     var storedState = req.cookies ? req.cookies[stateKey] : null;
@@ -50,9 +46,6 @@ const callbackRoute = (req: Request, res: Response) => {
 
                 var access_token = body.access_token,
                     refresh_token = body.refresh_token;
-
-                console.log(access_token);
-                console.log(refresh_token);
 
                 res.redirect(CLIENT_APP_URL + '/#' +
                     querystring.stringify({

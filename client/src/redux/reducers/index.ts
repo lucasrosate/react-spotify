@@ -40,35 +40,20 @@ const initialState: State = {
 }
 
 
-
 export const reducer: Reducer<State, StateAction> =
     (state: State = initialState, action: StateAction): State => {
         switch (action.type) {
 
             case actionType.GET_USER_DATA_SUCCESS:
+                console.log(state.player)
+
                 return {
                     ...state,
                     user: {
-                        ...action.payload,
+                        ...action.payload.data,
                         isLoggedIn: true,
                     },
-                    error: { ...state.error, codeError: null}
-                };
-
-            case actionType.GET_USER_DATA_FAILED:
-                return {
-                    ...state,
-                    error: action.payload
-                };
-
-
-            case actionType.GET_ACCESS_TOKEN_SUCCESS:
-                return {
-                    ...state,
-                    auth: {
-                        ...state.auth,
-                        access_token: action.payload,
-                    },
+                    player: action.payload.spotify,
                     error: { ...state.error, codeError: null}
                 };
 
@@ -86,7 +71,7 @@ export const reducer: Reducer<State, StateAction> =
                     }
                 };
             
-            case actionType.AUTH_SUCCESS:
+            case actionType.AUTH_FAILED:
                 return {
                     ...state,
                     error: { ...state.error, codeError: null}

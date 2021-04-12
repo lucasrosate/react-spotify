@@ -1,11 +1,18 @@
 import { Dispatch } from 'redux';
-import * as actionType from '@/redux/types';
+import authServerApi from '@/api/AuthServerApi';
 import getHarshParams from '@/utils/getHarshParams';
-import getAccessToken from './getAccessToken';
-
+import encrypt from '@/utils/encrypt';
+import * as actionType from '@/redux/types';
 import { StateAction } from '@/interfaces/StateInterface';
-import { IErrorMessage} from '@/interfaces/ErrorHandlingInterface';
-import store from '@/redux/store';
+import { IErrorMessage } from '@/interfaces/ErrorHandlingInterface';
+import decrypt from '@/utils/decrypt';
+
+
+interface IToken {
+    access_token: string | null,
+    refresh_token: string | null,
+    success?: boolean
+}
 
 /**
  * This function returns user `access_token` and user `refresh_token` after login.
@@ -14,36 +21,47 @@ import store from '@/redux/store';
  */
 const authenticate = () => {
     return async (dispatch: Dispatch<StateAction>) => {
+        var tokens: IToken = { access_token: null, refresh_token: null };
 
+        tokens.access_token = localStorage.getItem("access_token") as string;
+        tokens.refresh_token = localStorage.getItem("refresh_token") as string;
 
-        var tokens = {
-            access_token: localStorage.getItem("access_token") as string,
-            refresh_token: localStorage.getItem("refresh_token") as string,
-            success: false
-        };
-        console.log(tokens);
-        tokens.success = tokens.refresh_token ? true : false;
-
-        if (tokens.success && !tokens.access_token)
-            return store.dispatch(getAccessToken());
-
-        if (!tokens.success)
+        if (!tokens.access_token && !tokens.refresh_token) {
             tokens = getHarshParams();
+            if (tokens.success) {
+                localStorage.setItem("access_token", tokens.access_token as string);
+                localStorage.setItem("refresh_token", tokens.refresh_token as string);
 
+                return dispatch({
+                    type: actionType.AUTH_SUCCESS,
+                    payload: tokens
+                });
+            } else {
+                return dispatch({
+                    type: actionType.AUTH_FAILED,
+                    payload: {
+                        codeError: 1,
+                        errorMessage: "Params are not valid, user must login"
+                    } as IErrorMessage
+                });
+            }
+        } else if (!tokens.access_token && tokens.refresh_token) {
+            const res = await authServerApi.get('/refresh_token', {
+                params: { refresh_token: encrypt(tokens.refresh_token)}
+            });
 
+            tokens.access_token = decrypt(res.data.access_token);
+            localStorage.setItem("access_token", tokens.access_token as string);
+            localStorage.setItem("refresh_token", tokens.refresh_token as string);
 
-        if (tokens.success) {
             return dispatch({
                 type: actionType.AUTH_SUCCESS,
                 payload: tokens
             });
         } else {
             return dispatch({
-                type: actionType.AUTH_FAILED,
-                payload: {
-                    errorMessage: "token data is not valid",
-                    codeError: 3
-                } as IErrorMessage
+                type: actionType.AUTH_SUCCESS,
+                payload: tokens
             });
         }
     }

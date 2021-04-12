@@ -7,3 +7,5 @@ export const GET_ACCESS_TOKEN_FAILED = "GET_ACCESS_TOKEN_FAILED";
 
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_FAILED = "AUTH_FAILED";
+
+export const REMOVE_TOKENS = "REMOVE_TOKENS";

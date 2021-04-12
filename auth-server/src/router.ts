@@ -4,7 +4,7 @@ import {
     callbackRoute,
     loginRoute,
     refreshTokenRoute,
-} from './routes/package';
+} from './routes';
 
 
 const router = express.Router();

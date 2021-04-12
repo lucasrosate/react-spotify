@@ -11,26 +11,32 @@ import { IErrorMessage } from '@/interfaces/ErrorHandlingInterface';
  */
 const getUserData = () => {
     return async (dispatch: Dispatch<StateAction>) => {
-        const tokens = store.getState().auth;
+        const access_token = store.getState().auth.access_token;
 
-        if (!tokens.access_token) {
+        console.log(access_token);
+
+        const res = await spotifyWebApi.get('/', {
+            headers: { 'Authorization': 'Bearer ' + access_token }
+        });
+
+        if (res.status < 400) { 
+            dispatch({
+                type: actionType.GET_USER_DATA_SUCCESS,
+                payload: {
+                    data: res.data,
+                    spotify: "player"
+                }
+            });  
+    
+        } else {
             return dispatch({
                 type: actionType.GET_USER_DATA_FAILED,
                 payload: {
-                    errorMessage: "access_token does not exist.",
-                    codeError: 1
+                    codeError: 3,
+                    errorMessage: "Failed to get user data."
                 } as IErrorMessage
-            });
+            } )
         }
-        const res = await spotifyWebApi.get('/', {
-            headers: { 'Authorization': 'Bearer ' + tokens.access_token }
-        });
-
-        return dispatch({
-            type: actionType.GET_USER_DATA_SUCCESS,
-            payload: res.data
-        });
-
     }
 }
 

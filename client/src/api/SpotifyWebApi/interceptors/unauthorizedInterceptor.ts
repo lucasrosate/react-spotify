@@ -1,5 +1,6 @@
+import store from "@/redux/store";
 import { AxiosInstance } from "axios";
-import { getAccessToken } from '@/redux/actions/UserActions';
+import removeTokens from "@/redux/actions/UserActions/removeTokens";
 
 const unauthorizedInterceptor = (api: AxiosInstance) => {
     const UNAUTHORIZED = 401;
@@ -9,11 +10,11 @@ const unauthorizedInterceptor = (api: AxiosInstance) => {
             const { status } = error.response;
             if (status === UNAUTHORIZED) {
                 localStorage.removeItem("access_token");
-                return getAccessToken();
             }
+            store.dispatch(removeTokens());
             return Promise.reject(error);
         });
-    }
+}
 
 
 export default unauthorizedInterceptor;

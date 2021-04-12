@@ -18,7 +18,5 @@ app.use(cors())
     .use(router);
 
 app.listen(PORT, () => {
-    console.log("URL: " + BASE_URL);
-    console.log("Listening on PORT: " + PORT);
-
+    console.log("Auth-server is online, url: " + BASE_URL + ", PORT: " + PORT);
 });

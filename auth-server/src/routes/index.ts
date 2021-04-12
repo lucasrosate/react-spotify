@@ -7,4 +7,4 @@ export {
     callbackRoute,
     loginRoute,
     refreshTokenRoute
-}
+};

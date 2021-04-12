@@ -18,7 +18,8 @@ while (e = r.exec(q)) {
 }
 
 if (!harshParams.error) {
-    return {
+        console.log(harshParams);
+        return {
         access_token: decrypt(harshParams.access_token),
         refresh_token: decrypt(harshParams.refresh_token),
         success: true
