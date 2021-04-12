@@ -1,13 +1,16 @@
-import { useScript } from '@/hooks';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import {loadPlayer} from '@/redux/actions/UserActions';
+import { useScript } from '@/hooks';
 import { State } from '@/interfaces/StateInterface';
 
-const usePlayer = () => {
+
+const useInitializePlayer = () => {
     const status = useScript("https://sdk.scdn.co/spotify-player.js");
 
-    const [player, setPlayer] = useState<Spotify.SpotifyPlayer | null>(null);
     const access_token = useSelector((state: State) => state.auth.access_token);
+    
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (status === "ready" && access_token)
@@ -39,11 +42,11 @@ const usePlayer = () => {
                 // Connect to the player!
                 player.connect();
 
-                setPlayer(player);
+                dispatch(loadPlayer(player));
             }
-    }, [status])
+    }, [status, dispatch])
 
-    return player;
+
 }
 
-export default usePlayer;
+export default useInitializePlayer;

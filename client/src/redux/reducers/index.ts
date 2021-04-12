@@ -45,15 +45,12 @@ export const reducer: Reducer<State, StateAction> =
         switch (action.type) {
 
             case actionType.GET_USER_DATA_SUCCESS:
-                console.log(state.player)
-
                 return {
                     ...state,
                     user: {
                         ...action.payload.data,
                         isLoggedIn: true,
                     },
-                    player: action.payload.spotify,
                     error: { ...state.error, codeError: null}
                 };
 
@@ -76,6 +73,12 @@ export const reducer: Reducer<State, StateAction> =
                     ...state,
                     error: { ...state.error, codeError: null}
                 };
+
+            case actionType.LOAD_PLAYER:
+                return {
+                    ...state,
+                    player: action.payload as Spotify.SpotifyPlayer
+                }
 
             default: return state;
         }

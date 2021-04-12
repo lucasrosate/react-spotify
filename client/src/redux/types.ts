@@ -9,3 +9,6 @@ export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_FAILED = "AUTH_FAILED";
 
 export const REMOVE_TOKENS = "REMOVE_TOKENS";
+
+
+export const LOAD_PLAYER = "LOAD_PLAYER";

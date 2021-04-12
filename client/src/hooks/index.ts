@@ -1,9 +1,9 @@
-import useUserState from './useUserState';
+import useFetchData from './useFetchData';
 import useScript from './useScript';
-import usePlayer from './usePlayer';
+import useInitializePlayer from './useInitializePlayer';
 
 export {
-    useUserState,
+    useFetchData,
     useScript,
-    usePlayer
+    useInitializePlayer
 };

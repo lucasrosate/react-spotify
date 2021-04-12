@@ -1,11 +1,19 @@
 
-import { usePlayer, useUserState } from '@/hooks';
+import { useEffect } from 'react';
+import { useFetchData, useInitializePlayer } from '@/hooks';
 import style from '@/styles/page-styles/App.module.css';
+import { useSelector } from 'react-redux';
+import { State } from './interfaces/StateInterface';
 
 
 const App: React.FC = () => {
-    const userState = useUserState();
-    const player = usePlayer();
+    useFetchData();
+    useInitializePlayer();
+
+    const player = useSelector((state: State) => state.player);
+
+
+
 
 
     return (
@@ -27,8 +35,7 @@ const App: React.FC = () => {
                                 width: "900px",
                                 wordWrap: "break-word"
                             }}>
-                                {JSON.stringify(userState)}
-
+                                {JSON.stringify(player)}
                             </div>
 
 
@@ -39,7 +46,6 @@ const App: React.FC = () => {
 
                         </div>
                     </div>
-
 
 
                     <div className={style.playerbar}>

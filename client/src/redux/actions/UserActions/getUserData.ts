@@ -13,8 +13,6 @@ const getUserData = () => {
     return async (dispatch: Dispatch<StateAction>) => {
         const access_token = store.getState().auth.access_token;
 
-        console.log(access_token);
-
         const res = await spotifyWebApi.get('/', {
             headers: { 'Authorization': 'Bearer ' + access_token }
         });
