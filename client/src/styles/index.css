@@ -23,6 +23,7 @@
 
     --border-color: #505050;
 
+    font-size: 15px;
 }
 
 * {
@@ -36,4 +37,6 @@ body {
     margin: 0;
     box-sizing: border-box;
     color: var(--text-color-primary);
+    
+    font-size: 10px;
 }
