@@ -13,7 +13,7 @@
 :root {
     --background-color: #121212;
 
-    --background-color-lighter: #282828;
+    --background-color-lighter: #181818;
 
     --primary-color: #179443;
     --primary-color-lighter: #18ac4d;
@@ -21,7 +21,7 @@
     --text-color-secondary: #ffff;
     --text-color-secondary-darker: #ddddf1;
 
-    --border-color: #505050;
+    --border-color: rgb(80, 80, 80, .6);
 
     font-size: 15px;
 }

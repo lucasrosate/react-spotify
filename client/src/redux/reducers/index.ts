@@ -1,4 +1,4 @@
-import { State, StateAction } from '@/interfaces/StateInterface';
+import { State, StateAction, IPlayerInfo } from '@/interfaces';
 import { Reducer } from 'redux';
 import * as actionType from '../types';
 
@@ -31,6 +31,7 @@ const initialState: State = {
         isLoggedIn: false
     },
     player: null,
+    playerInfo: null,
     loading: false,
     error: {
         errorMessage: "",
@@ -51,7 +52,7 @@ export const reducer: Reducer<State, StateAction> =
                         ...action.payload.data,
                         isLoggedIn: true,
                     },
-                    error: { ...state.error, codeError: null}
+                    error: { ...state.error, codeError: null }
                 };
 
             case actionType.GET_USER_DATA_FAILED:
@@ -60,24 +61,30 @@ export const reducer: Reducer<State, StateAction> =
                     error: action.payload
                 };
 
-            case actionType.AUTH_SUCCESS: 
+            case actionType.AUTH_SUCCESS:
                 return {
                     ...state,
                     auth: {
                         ...action.payload
                     }
                 };
-            
+
             case actionType.AUTH_FAILED:
                 return {
                     ...state,
-                    error: { ...state.error, codeError: null}
+                    error: { ...state.error, codeError: null }
                 };
 
             case actionType.LOAD_PLAYER:
                 return {
                     ...state,
                     player: action.payload as Spotify.SpotifyPlayer
+                }
+
+            case actionType.LOAD_PLAYER_INFO_EVENT_LISTENER:
+                return {
+                    ...state,
+                    playerInfo: action.payload
                 }
 
             default: return state;

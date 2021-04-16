@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {loadPlayer} from '@/redux/actions/UserActions';
 import { useScript } from '@/hooks';
+import {loadPlayer, loadPlayerInfoListener} from '@/redux/actions/UserActions';
 import { State } from '@/interfaces/StateInterface';
 
 
@@ -28,7 +28,8 @@ const useInitializePlayer = () => {
                 player.addListener('playback_error', ({ message }) => { console.error(message); });
 
                 // Playback status updates
-                player.addListener('player_state_changed', state => { console.log(state); });
+                player.addListener('player_state_changed', state => 
+                    { dispatch(loadPlayerInfoListener(state)); });
 
                 // Ready
                 player.addListener('ready', ({ device_id }) => {

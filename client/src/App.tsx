@@ -4,6 +4,7 @@ import { useFetchData, useInitializePlayer } from '@/hooks';
 import NavigationBar from '@/components/NavigationBar';
 import { State } from './interfaces/StateInterface';
 import style from '@/styles/page-styles/App.module.css';
+import PlayerBar from './components/PlayerBar';
 
 
 const App: React.FC = () => {
@@ -13,8 +14,6 @@ const App: React.FC = () => {
     const player = useSelector((state: State) => state.player);
 
     const isLoggedIn = useSelector((state: State) => state.user.isLoggedIn);
-
-
 
     return (
         <>
@@ -38,6 +37,8 @@ const App: React.FC = () => {
                                     wordWrap: "break-word"
                                 }}>
                                     <Route exact path="/">
+                                        <div className="text-white bg-gray-500 ">
+                                        </div>
                                     </Route>
 
                                 </div>
@@ -53,9 +54,8 @@ const App: React.FC = () => {
 
 
                         <div className={style.playerbar}>
-                            <button className="btn-spotify btn-primary" onClick={() => player.togglePlay()}>Play/Pause</button>
-                            <button className="btn-spotify btn-primary" onClick={() => player.nextTrack()}>Next</button>
 
+                            <PlayerBar />
                         </div>
 
                     </div>

@@ -1,4 +1,5 @@
 import { IErrorMessage } from './ErrorHandlingInterface';
+import { IPlayerInfo } from './PlayerInfoInterface';
 
 export interface IAuth {
     access_token: string | null,
@@ -39,6 +40,7 @@ export type State = {
     auth: IAuth,
     user: IUser,
     player: Spotify.SpotifyPlayer | null,
+    playerInfo: IPlayerInfo | null,
     loading: boolean,
     error: IErrorMessage,
 
