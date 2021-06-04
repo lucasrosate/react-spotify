@@ -31,7 +31,7 @@ const PlayButton: React.FC<Props> =
                     <PanelButton
                         width={buttonSize}
                         height={buttonSize}
-                        paddingLeft={1}
+                        paddingLeft={2}
                         onClick={() => togglePlay()}
                     >
                         <BiPause

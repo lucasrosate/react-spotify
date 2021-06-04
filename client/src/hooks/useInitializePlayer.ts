@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useScript } from '@/hooks';
-import {loadPlayer, loadPlayerInfoListener} from '@/redux/actions/UserActions';
+import { loadPlayer, loadPlayerInfoListener } from '@/redux/actions/UserActions';
 import { State } from '@/interfaces/StateInterface';
 
 
@@ -9,11 +9,11 @@ const useInitializePlayer = () => {
     const status = useScript("https://sdk.scdn.co/spotify-player.js");
 
     const access_token = useSelector((state: State) => state.auth.access_token);
-    
+
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (status === "ready" && access_token)
+        if (status === "ready" && access_token) {
             window.onSpotifyWebPlaybackSDKReady = () => {
 
                 const player = new Spotify.Player({
@@ -28,8 +28,7 @@ const useInitializePlayer = () => {
                 player.addListener('playback_error', ({ message }) => { console.error(message); });
 
                 // Playback status updates
-                player.addListener('player_state_changed', state => 
-                    { dispatch(loadPlayerInfoListener(state)); });
+                player.addListener('player_state_changed', state => { dispatch(loadPlayerInfoListener(state)); });
 
                 // Ready
                 player.addListener('ready', ({ device_id }) => {
@@ -42,10 +41,14 @@ const useInitializePlayer = () => {
                 });
                 // Connect to the player!
                 player.connect();
-
                 dispatch(loadPlayer(player));
             }
-    }, [status, dispatch])
+
+
+
+
+        }
+    }, [status, dispatch, access_token])
 
 
 }

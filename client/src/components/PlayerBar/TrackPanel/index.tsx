@@ -1,5 +1,4 @@
 import React from "react";
-import clsx from 'clsx';
 import PlayButton from "./PlayButton";
 import { IconContext } from 'react-icons';
 import { AiFillStepBackward, AiFillStepForward } from 'react-icons/ai';
@@ -12,7 +11,7 @@ interface Props {
 }
 
 const BUTTON_SIZE = 40;
-const INNER_BUTTON_SIZE = BUTTON_SIZE - 8;
+const INNER_BUTTON_SIZE = BUTTON_SIZE - 12;
 const INNER_BUTTON_SIZE_2 = BUTTON_SIZE - 18;
 
 const TrackPanel: React.FC<Props> = ({ player, playerInfo }: Props) => {

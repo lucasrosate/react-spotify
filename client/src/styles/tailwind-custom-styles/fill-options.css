@@ -1,9 +1,12 @@
 
 @layer utilities {
-    .bg-color {
-        background-color: var(--background-color);
+    @variants active, hover, focus, dark {
+        .bg-color {
+            background-color: var(--background-color);
+        }
+        .bg-color-lighter {
+            background-color: var(--background-color-lighter);
+        }
     }
-    .bg-color-lighter {
-        background-color: var(--background-color-lighter);
-    }
+
 }

@@ -1,5 +1,5 @@
 import { State } from "@/interfaces/StateInterface";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import TrackInfo from './TrackInfo';
@@ -12,18 +12,16 @@ const PlayerBar: React.FC = () => {
     const playerInfo = useSelector((state: State) => state.playerInfo);
 
     useEffect(() => {
-        console.log(playerInfo)
+       console.log(playerInfo)
     }, [playerInfo]);
 
 
-    return player && playerInfo && (
+    return (
+        player && playerInfo &&
         <Container>
 
             <TrackInfo currentTrack={playerInfo?.track_window.current_track || null} />
-
             <TrackPanel player={player} playerInfo={playerInfo} />
-
-            <div></div>
 
         </Container>
     )

@@ -1,4 +1,4 @@
-import { State, StateAction, IPlayerInfo } from '@/interfaces';
+import { State, StateAction } from '@/interfaces';
 import { Reducer } from 'redux';
 import * as actionType from '../types';
 

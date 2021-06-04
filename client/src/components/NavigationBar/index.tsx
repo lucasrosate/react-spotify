@@ -41,7 +41,7 @@ const NavigationBar: React.FC = () => {
     return (
         <> 
         
-            <div className="mr-auto ml-5 mt-6 mb-6" style={{ width: "120px" }}>
+            <div className="mr-auto ml-7 mt-6 mb-6" style={{ width: "130px" }}>
                 <Link to="/"><img src={spotifyWhiteLogo} alt="" /></Link>
          
             </div>

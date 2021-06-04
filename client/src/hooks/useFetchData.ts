@@ -6,12 +6,12 @@ import { State } from '@/interfaces/StateInterface';
 const useFetchData = () => {
     const dispatch = useDispatch();
 
-    var userState = useSelector((state: State) => state);
+    //var userState = useSelector((state: State) => state);
     var authState = useSelector((state: State) => state.auth);
 
     useEffect(() => {
         dispatch(authenticate());
-    }, [authenticate]);
+    }, [dispatch]);
 
 
     useEffect(() => {

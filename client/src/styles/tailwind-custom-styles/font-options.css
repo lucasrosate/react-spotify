@@ -1,14 +1,16 @@
 @layer utilities {
+    @variants active, dark, hover, focus {
 
-    .text-primary {
-        color: var(--text-color-primary);
-    }
+        .text-primary {
+            color: var(--text-color-primary);
+        }
 
-    .text-secondary {
-        color: var(--text-color-secondary);
-    }
+        .text-secondary {
+            color: var(--text-color-secondary);
+        }
 
-    .text-secondary-darker {
-        color: var(--text-color-secondary-darker);
+        .text-secondary-darker {
+            color: var(--text-color-secondary-darker);
+        }
     }
 }

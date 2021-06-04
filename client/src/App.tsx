@@ -7,7 +7,10 @@ import style from '@/styles/page-styles/App.module.css';
 import PlayerBar from './components/PlayerBar';
 
 
+
 const App: React.FC = () => {
+
+
     useFetchData();
     useInitializePlayer();
 
@@ -18,8 +21,7 @@ const App: React.FC = () => {
     return (
         <>
             {
-                player &&
-
+            
                 <Router>
                     <div className={style.App}>
                         <div className={style.container}>
@@ -51,10 +53,10 @@ const App: React.FC = () => {
 
                             </div>
                         </div>
-
+                            
 
                         <div className={style.playerbar}>
-
+                 
                             <PlayerBar />
                         </div>
 
@@ -62,7 +64,6 @@ const App: React.FC = () => {
                 </Router>
 
             }
-
         </>
     );
 }
